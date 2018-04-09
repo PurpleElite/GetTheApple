@@ -14,7 +14,7 @@ public class SimplePlatformController : MonoBehaviour
     private float scale = 1f;
     private float velocity = 0f;
     private Transform groundCheck;
-    public bool grounded = false;
+    private bool grounded = false;
     private Animator anim;
     private Rigidbody2D rb2d;
 
@@ -62,10 +62,20 @@ public class SimplePlatformController : MonoBehaviour
         else if (h < 0 && facingRight)
             Flip();
 
+        if (Mathf.Abs(rb2d.velocity.y) > 0.01)
+        {
+            anim.SetTrigger("Jump");
+        }
+        else if (Mathf.Abs(rb2d.velocity.x) > 0.5)
+        {
+            anim.SetTrigger("Run");
+        }
+        else
+        {
+            anim.SetTrigger("Idle");
+        }
         if (jump)
         {
-            
-            anim.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
             scale = 0f;
