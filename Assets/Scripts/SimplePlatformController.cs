@@ -10,12 +10,11 @@ public class SimplePlatformController : MonoBehaviour
     public float moveForce = 365f;
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
-    public float scale = 1f;
-    public float velocity = 0f;
-    public Transform groundCheck;
 
-
-    private bool grounded = false;
+    private float scale = 1f;
+    private float velocity = 0f;
+    private Transform groundCheck;
+    public bool grounded = false;
     private Animator anim;
     private Rigidbody2D rb2d;
 
@@ -23,6 +22,7 @@ public class SimplePlatformController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        groundCheck = transform.Find("groundCheck");
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -37,7 +37,7 @@ public class SimplePlatformController : MonoBehaviour
             jump = true;
         }
 
-        if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("RightArrow"))
+        if (Input.GetButtonDown("Horizontal"))
         {
             if (scale < 1000)
                 scale = scale + 100;
@@ -48,27 +48,25 @@ public class SimplePlatformController : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
-                anim.SetFloat("Speed", Mathf.Abs(h));
-
        
         if (h * rb2d.velocity.x < maxSpeed)
             velocity = rb2d.velocity.x;
-            //rb2d.AddForce(Vector2.right * h * moveForce);
-            rb2d.AddForce(Vector2.right * h * scale);
+            rb2d.AddForce(Vector2.right * h * moveForce);
+            //rb2d.AddForce(Vector2.right * h * scale);
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
-            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed/16, rb2d.velocity.y/4);
+            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
-        if (h > 0 && facingRight)
+        if (h > 0 && !facingRight)
             Flip();
-        else if (h < 0 && !facingRight)
+        else if (h < 0 && facingRight)
             Flip();
 
         if (jump)
         {
             
             anim.SetTrigger("Jump");
-            rb2d.AddForce(new Vector2(0f, scale));
+            rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
             scale = 0f;
         }
