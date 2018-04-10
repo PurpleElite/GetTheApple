@@ -7,14 +7,19 @@ public class SimplePlatformController : MonoBehaviour
 
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
-    public float moveForce = 365f;
-    public float maxSpeed = 5f;
-    public float jumpForce = 1000f;
-
-    private float scale = 1f;
+    public float moveForce = 30f;
+    public float maxSpeed = 2f;
+    public float jumpForce = 250f;
+    private bool grounded = false;
     private float velocity = 0f;
     private Transform groundCheck;
-    private bool grounded = false;
+
+ 
+    public float jumpPower = 0f;
+
+
+
+
     private Animator anim;
     private Rigidbody2D rb2d;
 
@@ -22,7 +27,9 @@ public class SimplePlatformController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+
         groundCheck = transform.Find("groundCheck");
+
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -34,13 +41,12 @@ public class SimplePlatformController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            jump = true;
-        }
+            jumpPower = jumpPower + 20f;
+            if (jumpPower == 300f)
+            {
+                jump = true;
+            }
 
-        if (Input.GetButtonDown("Horizontal"))
-        {
-            if (scale < 1000)
-                scale = scale + 100;
         }
 
     }
@@ -48,11 +54,11 @@ public class SimplePlatformController : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
-       
+        anim.SetFloat("Speed", Mathf.Abs(h));
+
         if (h * rb2d.velocity.x < maxSpeed)
             velocity = rb2d.velocity.x;
             rb2d.AddForce(Vector2.right * h * moveForce);
-            //rb2d.AddForce(Vector2.right * h * scale);
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
@@ -62,9 +68,12 @@ public class SimplePlatformController : MonoBehaviour
         else if (h < 0 && facingRight)
             Flip();
 
+
+
         if (Mathf.Abs(rb2d.velocity.y) > 0.01)
         {
             anim.SetTrigger("Jump");
+
         }
         else if (Mathf.Abs(rb2d.velocity.x) > 0.5)
         {
@@ -76,9 +85,11 @@ public class SimplePlatformController : MonoBehaviour
         }
         if (jump)
         {
+
             rb2d.AddForce(new Vector2(0f, jumpForce));
+
             jump = false;
-            scale = 0f;
+            jumpPower = 0;
         }
     }
 
