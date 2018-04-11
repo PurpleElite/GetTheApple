@@ -12,19 +12,27 @@ public class SimplePlatformController : MonoBehaviour
     public float maxSpeed = 2f;
     public float jumpForce = 250f;
     public float terminalVelocity = 5f;
-	public AudioSource jumpSound;
-	public AudioSource landSound;
-	public AudioSource tumbleSound;
-	public AudioSource faceSound;
+    private AudioSource jumpSound;
+    private AudioSource landSound;
+    private AudioSource tumbleSound;
+    private AudioSource faceSound;
+    private AudioSource chargeSound;
     private float velocity = 0f;
     private BoxCollider2D groundCheck;
-    public float jumpPower = 0f;
+    private float jumpPower = 100f;
+    [SerializeField]
     private bool grounded = false;
+    [SerializeField]
     private bool control = true;
+    [SerializeField]
     private bool tumble = false;
+    [SerializeField]
     private bool recovering = false;
     private Animator anim;
     private Rigidbody2D rb2d;
+
+    //Keep track of number of objects the groundcheck has entered
+    private int colliders = 0;
 
 
     // Use this for initialization
@@ -35,6 +43,7 @@ public class SimplePlatformController : MonoBehaviour
         landSound = audio[1];
         tumbleSound = audio[2];
         faceSound = audio[3];
+        chargeSound = audio[4];
         currentJump = 0;
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
@@ -46,19 +55,18 @@ public class SimplePlatformController : MonoBehaviour
         if (Input.GetButton("Jump") && grounded && !recovering && !tumble)
 
         {
-            jumpPower = jumpPower + 5f;
-
+            jumpPower = jumpPower + 3f;
+            if(!chargeSound.isPlaying)
+                chargeSound.Play();
             if (jumpPower >= 400f)
-
             {
-
                 jump = true;
-
             }
         }
 
         if (Input.GetButtonUp("Jump") && grounded && !recovering && !tumble)
         {
+            chargeSound.Stop();
             jump = true;
         }
 
@@ -88,10 +96,8 @@ public class SimplePlatformController : MonoBehaviour
         //Determine if basketman is done getting up after a faceplant
         if (recovering)
         {
-            Debug.Log("recovering");
             if (anim.GetCurrentAnimatorStateInfo(0).length <= anim.GetCurrentAnimatorStateInfo(0).normalizedTime)
             {
-                Debug.Log("recovered");
                 anim.ResetTrigger("GetUp");
                 recovering = false;
                 control = true;
@@ -105,6 +111,9 @@ public class SimplePlatformController : MonoBehaviour
             anim.ResetTrigger("Jump");
             control = false;
             tumble = true;
+            chargeSound.Stop();
+            if (!tumbleSound.isPlaying)
+                tumbleSound.Play();
         }
         else if (recovering == false && tumble == true && Mathf.Abs(rb2d.velocity.y) < 0.01)
         {
@@ -112,6 +121,8 @@ public class SimplePlatformController : MonoBehaviour
             anim.SetTrigger("Faceplant");
             anim.ResetTrigger("Tumble");
             tumble = false;
+            tumbleSound.Stop();
+            faceSound.Play();
         }
         else if (control == false && (Input.GetButton("Jump") || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01))
         {
@@ -136,23 +147,29 @@ public class SimplePlatformController : MonoBehaviour
             rb2d.AddForce(new Vector2(0f, jumpPower));
             jumpSound.Play();
             jump = false;
-            jumpPower = 0;
+            jumpPower = 100f;
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            colliders++;
             grounded = true;
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            grounded = false;
+            colliders--;
+            if(colliders == 0)
+            {
+                chargeSound.Stop();
+                grounded = false;
+            }
         }
     }
 
