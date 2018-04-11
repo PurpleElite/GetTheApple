@@ -6,16 +6,21 @@ public class FallingPlatform : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
 	public float fallDelay;
+	float interval;
 
 	void Start()
 	{
 		rb2d = GetComponent<Rigidbody2D>();
 	}
+		
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.collider.CompareTag ("Player")) {
-			StartCoroutine (Fall ());
+			var normal = col.contacts[0].normal;
+			if (normal.y < 0) {
+				Destroy (gameObject, 1);
+			}
 		}
 	}
 
@@ -25,4 +30,7 @@ public class FallingPlatform : MonoBehaviour {
 		rb2d.isKinematic = false;
 		yield return 0;
 	}
+
+
+
 }
