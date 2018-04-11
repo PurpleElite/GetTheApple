@@ -17,6 +17,8 @@ public class SimplePlatformController : MonoBehaviour
     public float jumpPower = 0f;
     private bool grounded = false;
     private bool control = true;
+    private bool tumble = false;
+    private bool recovering = false;
     private Animator anim;
     private Rigidbody2D rb2d;
 
@@ -78,26 +80,50 @@ public class SimplePlatformController : MonoBehaviour
         else if (h < 0 && facingRight && control)
             Flip();
 
+        //Determine if basketman is done getting up after a faceplant
+        if (recovering)
+        {
+            Debug.Log("recovering");
+            if (anim.GetCurrentAnimatorStateInfo(0).length <= anim.GetCurrentAnimatorStateInfo(0).normalizedTime)
+            {
+                Debug.Log("recovered");
+                anim.ResetTrigger("GetUp");
+                recovering = false;
+                control = true;
+            }
+        }
+
         //Determine what animation to play and whether the player currently has control
-        if (rb2d.velocity.y < -1 * (terminalVelocity-0.1) )
+        if (recovering == false && rb2d.velocity.y < -1 * (terminalVelocity - 0.1))
         {
             anim.SetTrigger("Tumble");
+            anim.ResetTrigger("Jump");
             control = false;
+            tumble = true;
         }
-        else if (Mathf.Abs(rb2d.velocity.y) > 0.01)
+        else if (recovering == false && tumble == true && Mathf.Abs(rb2d.velocity.y) < 0.01)
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            anim.SetTrigger("Faceplant");
+            anim.ResetTrigger("Tumble");
+            tumble = false;
+        }
+        else if (control == false && (Input.GetButton("Jump") || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01))
+        {
+            anim.SetTrigger("GetUp");
+            recovering = true;
+        }
+        else if (recovering == false && control == true && Mathf.Abs(rb2d.velocity.y) > 0.01)
         {
             anim.SetTrigger("Jump");
-            control = true;
         }
-        else if (Mathf.Abs(rb2d.velocity.x) > 0.5)
+        else if (recovering == false && control == true && Mathf.Abs(rb2d.velocity.x) > 0.5)
         {
             anim.SetTrigger("Run");
-            control = true;
         }
-        else
+        else if (recovering == false && control == true)
         {
             anim.SetTrigger("Idle");
-            control = true;
         }
 
         if (jump)
@@ -112,20 +138,16 @@ public class SimplePlatformController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("TriggerEnter");
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Enter");
             grounded = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D other)
     {
-        Debug.Log("TriggerExit");
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Exit");
             grounded = false;
         }
     }
