@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 using System.Collections;
 
 public class SimplePlatformController : MonoBehaviour
@@ -7,6 +7,7 @@ public class SimplePlatformController : MonoBehaviour
 
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
+    public int currentJump;
     public float moveForce = 30f;
     public float maxSpeed = 2f;
     public float jumpForce = 250f;
@@ -25,21 +26,35 @@ public class SimplePlatformController : MonoBehaviour
         Debug.Log("Test");
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        currentJump = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Jump"))
 
-        if (Input.GetButtonDown("Jump") && grounded && control)
         {
-            /* jumpPower = jumpPower + 20f;
-             if (jumpPower == 300f)
-             {
-                 jump = true;
-             }*/
-            jump = true;
+
+            print("you are holding JUMP");
+
+            jumpPower = jumpPower + 5f;
+
+            if (jumpPower >= 400f)
+
+            {
+
+                jump = true;
+
+            }
+
         }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            jump = true;
+        }
+
 
     }
 
@@ -51,7 +66,6 @@ public class SimplePlatformController : MonoBehaviour
             velocity = rb2d.velocity.x;
             rb2d.AddForce(Vector2.right * h * moveForce);
         }
-            //rb2d.AddForce(Vector2.right * h * scale);
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
@@ -89,7 +103,7 @@ public class SimplePlatformController : MonoBehaviour
         if (jump)
         {
 
-            rb2d.AddForce(new Vector2(0f, jumpForce));
+            rb2d.AddForce(new Vector2(0f, jumpPower));
 
             jump = false;
             jumpPower = 0;
