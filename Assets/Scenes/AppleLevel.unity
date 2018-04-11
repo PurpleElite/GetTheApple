@@ -2320,7 +2320,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.2411208, y: 0.28723478}
+  m_Offset: {x: 3.0019, y: 0.28723478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2345,7 +2345,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.3205113, y: 0.28723478}
+  m_Offset: {x: -2.096, y: 0.28723478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4806,14 +4806,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88f1386dd63147198d003daff00d37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenResolution: {x: 1058, y: 534}
-  internalResolution: {x: 531, y: 268}
+  screenResolution: {x: 948, y: 523}
+  internalResolution: {x: 486, y: 268}
   upscaledResolution: {x: 1060, y: 536}
   smooth: 0
   forceSquarePixels: 1
   pixels: {x: 134, y: 268}
   pixelsPerUnit: 100
-  finalBlitStretch: {x: 0.9999647, y: 1}
+  finalBlitStretch: {x: 0.9995515, y: 1}
   mainCamera: {fileID: 1344823884}
   mainCanvas: {fileID: 0}
 --- !u!81 &1344823882
@@ -6140,6 +6140,10 @@ MonoBehaviour:
   maxSpeed: 2
   jumpForce: 200
   terminalVelocity: 4.4
+  jumpSound: {fileID: 0}
+  landSound: {fileID: 0}
+  tumbleSound: {fileID: 0}
+  faceSound: {fileID: 0}
   jumpPower: 0
 --- !u!4 &1591501532
 Transform:
@@ -6165,7 +6169,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 814054e60cf9f384c816d4fff697531d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.518
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6240,11 +6244,11 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591501525}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 426d1453635deef48b7c823089674cb2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -6320,11 +6324,11 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591501525}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 062acda0a8e942b4f930099bea6ca372, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -6400,11 +6404,11 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591501525}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7b47d0466f9bd7b4cb4d805010dc9559, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

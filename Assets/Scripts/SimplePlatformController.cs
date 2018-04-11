@@ -26,6 +26,7 @@ public class SimplePlatformController : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb2d;
 
+
     // Use this for initialization
     void Awake()
     {
@@ -42,11 +43,9 @@ public class SimplePlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && grounded && !recovering && !tumble)
 
         {
-            print("you are holding JUMP");
-
             jumpPower = jumpPower + 5f;
 
             if (jumpPower >= 400f)
@@ -58,7 +57,7 @@ public class SimplePlatformController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp("Jump") && grounded && !recovering && !tumble)
         {
             jump = true;
         }
@@ -134,7 +133,7 @@ public class SimplePlatformController : MonoBehaviour
 
         if (jump)
         {
-            rb2d.AddForce(new Vector2(0f, jumpForce));
+            rb2d.AddForce(new Vector2(0f, jumpPower));
             jumpSound.Play();
             jump = false;
             jumpPower = 0;
