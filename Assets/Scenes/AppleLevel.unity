@@ -2320,7 +2320,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.121, y: 0.28723478}
+  m_Offset: {x: 3.2411208, y: 0.28723478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2331,7 +2331,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4060402, y: 7.7620974}
+  m_Size: {x: 0.16579819, y: 7.7620974}
   m_EdgeRadius: 0
 --- !u!61 &724314681
 BoxCollider2D:
@@ -2345,7 +2345,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.21, y: 0.2872349}
+  m_Offset: {x: -2.3205113, y: 0.28723478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2356,7 +2356,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.53301954, y: 7.7620974}
+  m_Size: {x: 0.3119974, y: 7.7620974}
   m_EdgeRadius: 0
 --- !u!4 &724314682
 Transform:
@@ -4806,14 +4806,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88f1386dd63147198d003daff00d37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenResolution: {x: 948, y: 523}
-  internalResolution: {x: 486, y: 268}
+  screenResolution: {x: 1058, y: 534}
+  internalResolution: {x: 531, y: 268}
   upscaledResolution: {x: 1060, y: 536}
   smooth: 0
   forceSquarePixels: 1
   pixels: {x: 134, y: 268}
   pixelsPerUnit: 100
-  finalBlitStretch: {x: 0.9995515, y: 1}
+  finalBlitStretch: {x: 0.9999647, y: 1}
   mainCamera: {fileID: 1344823884}
   mainCanvas: {fileID: 0}
 --- !u!81 &1344823882
@@ -6140,7 +6140,6 @@ MonoBehaviour:
   maxSpeed: 2
   jumpForce: 200
   terminalVelocity: 4.4
-  jumpSound: {fileID: 0}
   jumpPower: 0
 --- !u!4 &1591501532
 Transform:
