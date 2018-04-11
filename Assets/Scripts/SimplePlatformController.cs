@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 using System.Collections;
 
 public class SimplePlatformController : MonoBehaviour
@@ -7,6 +7,7 @@ public class SimplePlatformController : MonoBehaviour
 
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
+    public int currentJump;
     public float moveForce = 30f;
     public float maxSpeed = 2f;
     public float jumpForce = 250f;
@@ -20,6 +21,8 @@ public class SimplePlatformController : MonoBehaviour
     public float jumpPower = 0f;
     private bool grounded = false;
     private bool control = true;
+    private bool tumble = false;
+    private bool recovering = false;
     private Animator anim;
     private Rigidbody2D rb2d;
 
@@ -29,27 +32,27 @@ public class SimplePlatformController : MonoBehaviour
         Debug.Log("Test");
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-		AudioSource[] audio = GetComponents<AudioSource>();
-		jumpSound = audio[0];
-		landSound = audio [1];
-		tumbleSound = audio [2];
-		faceSound = audio [3];
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Jump"))
 
-        if (Input.GetButtonDown("Jump") && grounded && control)
         {
             /* jumpPower = jumpPower + 20f;
              if (jumpPower == 300f)
              {
                  jump = true;
              }*/
-            jump = true; 
-			//jumpSound.PlayOneShot (jumpSound);
+            jump = true;
         }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            jump = true;
+        }
+
 
     }
 
@@ -61,7 +64,6 @@ public class SimplePlatformController : MonoBehaviour
             velocity = rb2d.velocity.x;
             rb2d.AddForce(Vector2.right * h * moveForce);
         }
-            //rb2d.AddForce(Vector2.right * h * scale);
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
@@ -74,34 +76,53 @@ public class SimplePlatformController : MonoBehaviour
         else if (h < 0 && facingRight && control)
             Flip();
 
+        //Determine if basketman is done getting up after a faceplant
+        if (recovering)
+        {
+            Debug.Log("recovering");
+            if (anim.GetCurrentAnimatorStateInfo(0).length <= anim.GetCurrentAnimatorStateInfo(0).normalizedTime)
+            {
+                Debug.Log("recovered");
+                anim.ResetTrigger("GetUp");
+                recovering = false;
+                control = true;
+            }
+        }
+
         //Determine what animation to play and whether the player currently has control
-        if (rb2d.velocity.y < -1 * (terminalVelocity-0.1) )
+        if (recovering == false && rb2d.velocity.y < -1 * (terminalVelocity - 0.1))
         {
             anim.SetTrigger("Tumble");
-			//tumbleSound.Play ();
             control = false;
-			//if (rb2d.velocity.y == 0)
-				//tumbleSound.Pause();
-		}
+        }
         else if (Mathf.Abs(rb2d.velocity.y) > 0.01)
         {
-            anim.SetTrigger("Jump");
-            control = true;
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            anim.SetTrigger("Faceplant");
+            anim.ResetTrigger("Tumble");
+            tumble = false;
         }
-        else if (Mathf.Abs(rb2d.velocity.x) > 0.5)
+        else if (control == false && (Input.GetButton("Jump") || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01))
+        {
+            anim.SetTrigger("GetUp");
+            recovering = true;
+        }
+        else if (recovering == false && control == true && Mathf.Abs(rb2d.velocity.y) > 0.01)
+        {
+            anim.SetTrigger("Jump");
+        }
+        else if (recovering == false && control == true && Mathf.Abs(rb2d.velocity.x) > 0.5)
         {
             anim.SetTrigger("Run");
-            control = true;
         }
-        else
+        else if (recovering == false && control == true)
         {
             anim.SetTrigger("Idle");
-            control = true;
         }
 
         if (jump)
         {
-			jumpSound.Play();
+
             rb2d.AddForce(new Vector2(0f, jumpForce));
 
             jump = false;
@@ -111,20 +132,16 @@ public class SimplePlatformController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("TriggerEnter");
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Enter");
             grounded = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D other)
     {
-        Debug.Log("TriggerExit");
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Exit");
             grounded = false;
         }
     }
@@ -137,3 +154,28 @@ public class SimplePlatformController : MonoBehaviour
         transform.localScale = theScale;
     }
 }
+		AudioSource[] audio = GetComponents<AudioSource>();
+		jumpSound = audio[0];
+		landSound = audio [1];
+		tumbleSound = audio [2];
+		faceSound = audio [3];
+        currentJump = 0;
+
+            print("you are holding JUMP");
+
+            jumpPower = jumpPower + 5f;
+
+            if (jumpPower >= 400f)
+
+            {
+
+                jump = true;
+
+            }
+
+            anim.ResetTrigger("Jump");
+            tumble = true;
+        }
+        else if (recovering == false && tumble == true && Mathf.Abs(rb2d.velocity.y) < 0.01)
+			jumpSound.Play();
+            rb2d.AddForce(new Vector2(0f, jumpForce));
