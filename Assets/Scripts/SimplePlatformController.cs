@@ -52,7 +52,7 @@ public class SimplePlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Jump") && grounded && !recovering && !tumble)
+        if (Input.GetButton("Jump") && grounded && !recovering && !tumble && control)
 
         {
             jumpPower = jumpPower + 3f;
@@ -64,7 +64,7 @@ public class SimplePlatformController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Jump") && grounded && !recovering && !tumble)
+        if (Input.GetButtonUp("Jump") && grounded && !recovering && !tumble && control)
         {
             chargeSound.Stop();
             jump = true;
@@ -107,11 +107,12 @@ public class SimplePlatformController : MonoBehaviour
         //Determine what animation to play and whether the player currently has control
         if (recovering == false && rb2d.velocity.y < -1 * (terminalVelocity - 0.1))
         {
+            chargeSound.Stop();
             anim.SetTrigger("Tumble");
             anim.ResetTrigger("Jump");
             control = false;
             tumble = true;
-            chargeSound.Stop();
+            
             if (!tumbleSound.isPlaying)
                 tumbleSound.Play();
         }
@@ -144,10 +145,12 @@ public class SimplePlatformController : MonoBehaviour
 
         if (jump)
         {
+           
             rb2d.AddForce(new Vector2(0f, jumpPower));
             jumpSound.Play();
             jump = false;
             jumpPower = 100f;
+            chargeSound.Stop();
         }
     }
 
