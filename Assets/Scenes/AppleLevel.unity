@@ -5877,14 +5877,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88f1386dd63147198d003daff00d37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenResolution: {x: 956, y: 533}
-  internalResolution: {x: 481, y: 268}
+  screenResolution: {x: 816, y: 326}
+  internalResolution: {x: 671, y: 268}
   upscaledResolution: {x: 1060, y: 536}
   smooth: 0
   forceSquarePixels: 1
   pixels: {x: 134, y: 268}
   pixelsPerUnit: 100
-  finalBlitStretch: {x: 0.99935645, y: 1}
+  finalBlitStretch: {x: 0.9997349, y: 1}
   mainCamera: {fileID: 1344823884}
   mainCanvas: {fileID: 265586383}
 --- !u!81 &1344823882
@@ -6792,6 +6792,46 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1547392279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1547392281}
+  - component: {fileID: 1547392280}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1547392280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1547392279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78a2e0967e565d458ca8031d8b7935e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1547392281
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1547392279}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552353423
 GameObject:
   m_ObjectHideFlags: 0
