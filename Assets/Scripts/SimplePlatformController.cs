@@ -31,6 +31,8 @@ public class SimplePlatformController : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb2d;
 
+    private GameObject caterpillar;
+
     //Keep track of number of objects the groundcheck has entered
     private int colliders = 0;
 
@@ -47,6 +49,7 @@ public class SimplePlatformController : MonoBehaviour
         currentJump = 0;
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        caterpillar = GameObject.FindGameObjectWithTag("CaterpillarManager");
     }
 
     // Update is called once per frame
@@ -124,6 +127,9 @@ public class SimplePlatformController : MonoBehaviour
             tumble = false;
             tumbleSound.Stop();
             faceSound.Play();
+
+            //Inform the caterpillar manager that a faceplant has occured
+            caterpillar.GetComponent<CaterpillarManager>().FacePlant();
         }
         else if (control == false && (Input.GetButton("Jump") || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01))
         {
