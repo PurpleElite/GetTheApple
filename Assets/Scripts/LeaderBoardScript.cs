@@ -38,7 +38,7 @@ public static class LeaderBoardScript {
 		for (int i = 0; i < EntryCount; ++i) {
 			ScoreEntry entry;
 			entry.name = PlayerPrefs.GetString(PlayerPrefsBaseKey + "[" + i + "].name", "");
-			entry.score = PlayerPrefs.GetInt(PlayerPrefsBaseKey + "[" + i + "].score", 0);
+			entry.score = PlayerPrefs.GetFloat(PlayerPrefsBaseKey + "[" + i + "].score", 0);
 			s_Entries.Add(entry);
 		}
 

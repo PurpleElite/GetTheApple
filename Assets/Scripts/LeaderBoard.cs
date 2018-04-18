@@ -16,12 +16,12 @@ public class LeaderBoard : MonoBehaviour {
 		}
 
 		// Interface for reporting test scores.
-		GUILayout.Space(10);
+		GUILayout.Space(260);
 
 		_nameInput = GUILayout.TextField(_nameInput);
 		_scoreInput = GUILayout.TextField(_scoreInput);
 
-		if (GUILayout.Button("Record")) {
+		if (GUILayout.Button("Give Up")) {
 			int score;
 			int.TryParse(_scoreInput, out score);
 
