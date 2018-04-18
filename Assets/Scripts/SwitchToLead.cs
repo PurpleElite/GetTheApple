@@ -8,7 +8,7 @@ public class SwitchToLead : MonoBehaviour {
 	private void OnGUI() {
 		GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
 
-		GUILayout.Space(550);
+		GUILayout.Space(Screen.height - 30);
 		if (GUILayout.Button("Give Up")) {
 			SceneManager.LoadScene ("LeaderBoard");
 		}
