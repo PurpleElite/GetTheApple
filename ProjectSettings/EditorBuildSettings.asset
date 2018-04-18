@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/AppleLevel.unity
+    guid: 716267bd4355342bf85da2f35f58cae7
+  - enabled: 1
+    path: Assets/Scenes/LeaderBoard.unity
+    guid: 1e40e95a0d81f3c4caf18d0670a1d49d

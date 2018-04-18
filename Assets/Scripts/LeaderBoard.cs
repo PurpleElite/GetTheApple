@@ -21,7 +21,7 @@ public class LeaderBoard : MonoBehaviour {
 		_nameInput = GUILayout.TextField(_nameInput);
 		_scoreInput = GUILayout.TextField(_scoreInput);
 
-		if (GUILayout.Button("Give Up")) {
+		if (GUILayout.Button("Submit")) {
 			int score;
 			int.TryParse(_scoreInput, out score);
 
