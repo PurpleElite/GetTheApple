@@ -12,7 +12,7 @@ public class LeaderBoard : MonoBehaviour {
 		// Display high scores!
 		for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
 			var entry = LeaderBoardScript.GetEntry(i);
-			GUILayout.Label("Name: " + entry.name + ", Score: " + entry.score);
+			GUILayout.Label("Name: " + entry.name + ", Time: " + entry.score);
 		}
 
 		// Interface for reporting test scores.

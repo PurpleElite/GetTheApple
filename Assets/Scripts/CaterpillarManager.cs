@@ -53,12 +53,71 @@ public class CaterpillarManager : MonoBehaviour {
             Dialogue("Good Luck!", 23f);
             Dialogue("", 25f);
         }
+        if (faceplantCount == 6)
+        {
+            Dialogue("Ouch!", 0f);
+            Dialogue("Remember that you can\ngive up with the GIVE UP button!\nJust press it with the mouse.", 2f);
+            Dialogue("", 10f);
+        }
+        if (faceplantCount == 8)
+        {
+            Dialogue("Oh, close!", 0f);
+            Dialogue("You'll get to\nthe top in no time!", 4f);
+            Dialogue("", 10f);
+        }
+        if (faceplantCount == 11)
+        {
+            Dialogue("That looked painful!", 0f);
+            Dialogue("Don't push yourself too hard, okay?", 5f);
+            Dialogue("", 10f);
+        }
+        if (faceplantCount == 15)
+        {
+            Dialogue("Remember: if something is too hard,\nit's always okay to Give Up!", 0f);
+            Dialogue("I'm sure no one will judge you.", 7f);
+            Dialogue("", 11f);
+        }
+        if (faceplantCount == 18)
+        {
+            Dialogue("Maybe it's time to\ngive someone else a turn?", 0f);
+            Dialogue("All you have to do\nis Give Up.", 4f);
+            Dialogue("", 9f);
+        }
+        if (faceplantCount == 20)
+        {
+            Dialogue("Here's a caterpillar tip:", 0f);
+            Dialogue("Remember to use the\nspace bar or up arrow to jump!", 3f);
+            Dialogue("", 9f);
+        }
+        if (faceplantCount == 22)
+        {
+            Dialogue("You are very persistent. Why?", 0f);
+            Dialogue("", 5f);
+        }
+        if (faceplantCount == 26)
+        {
+            Dialogue("Don't push yourself too hard!", 0f);
+            Dialogue("", 5f);
+        }
+        if (faceplantCount == 32)
+        {
+            Dialogue("\"If at first you don't succeed,\njust Give Up.\"\n  -Theo Stewart", 0f);
+            Dialogue("", 8f);
+        }
+        if (faceplantCount == 36)
+        {
+            Dialogue("ლ(ಠ益ಠ)ლ", 0f);
+        }
+        if (faceplantCount == 45)
+        {
+            Dialogue("What are you trying to prove?", 0f);
+        }
     }
 
     private void Despawn()
     {
-        Animator anim = activeClone.GetComponent<Animator>();
-        anim.SetTrigger("Leave");
+        present = false;
+        activeClone.GetComponent<Animator>().SetTrigger("Leave");
         Destroy(activeClone, 0.556f);
     }
 
