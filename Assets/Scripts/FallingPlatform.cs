@@ -36,22 +36,13 @@ public class FallingPlatform : MonoBehaviour {
 
         yield return new WaitForSeconds(0.5f);
 
-        if (number == 0)
-        {
-            number = 1;
-
-        }
-
-        if (number == 1)
-        {
-            number = 0;
             rb2d.isKinematic = true;
             GameObject newplatform = Instantiate(gameObject, new Vector3(-.21f, -.55f, -1), new Quaternion(0, 0, 0, 0));
             BoxCollider2D[] myColliders = newplatform.GetComponents<BoxCollider2D>();
             foreach (BoxCollider2D bc in myColliders) bc.enabled = true;
             newplatform.GetComponent<FallingPlatform>().enabled = true;
             Destroy(gameObject, 1);
-        }
+        
         yield return 0;
 	}
 
