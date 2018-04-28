@@ -7,7 +7,6 @@ public class InputText : MonoBehaviour {
 
 	[SerializeField]
 	private InputField input;
-
 	void Awake()
 	{
 		//
@@ -15,7 +14,8 @@ public class InputText : MonoBehaviour {
 
 	public void GetInput(string entry)
 	{
-		Debug.Log (entry);
-		input.text = "";
+        PlayerPrefs.SetString("Username", entry);
+        Debug.Log (entry);
+		input.text = entry;
 	}
 }

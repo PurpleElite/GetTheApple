@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class LeaderBoardScript {
-	public const int EntryCount = 10;
+	public static int EntryCount = 1;
 
 	public struct ScoreEntry {
 		public string name;
 		public float score;
 
 		public ScoreEntry(string name, float score) {
-			this.name = name;
-			this.score = Time.time;
+			this.name = PlayerPrefs.GetString("Username");
+			this.score = Time.time - StartGame.startTime;
 		}
 	}
 	private static List<ScoreEntry> s_Entries;
@@ -57,9 +57,10 @@ public static class LeaderBoardScript {
 	}
 
 	public static void Record(string name, float score) {
-		Entries.Add (new ScoreEntry (name, score));
+        EntryCount = EntryCount + 1;
+        Entries.Add (new ScoreEntry (name, score));
 		SortScores();
-		Entries.RemoveAt(Entries.Count - 1);
 		SaveScores();
+
 	}
 }
