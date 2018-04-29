@@ -7,12 +7,12 @@ public class LeaderBoard : MonoBehaviour {
 	private static string _nameInput = "";
 	private static string _scoreInput = "0";
     private int rec = 0;
+    public Vector2 scrollPosition;
     private void OnGUI() {
-        
-		GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-
-		// Display high scores!
-		for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
+		//GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width), GUILayout.Height(Screen.height));
+        // Display high scores!
+        for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
 			var entry = LeaderBoardScript.GetEntry(i);
 			GUILayout.Label((i + 1) + ". Name: " + entry.name + ", Time: " + entry.score);
         }
