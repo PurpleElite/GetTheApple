@@ -267,7 +267,7 @@ public class CaterpillarManager : MonoBehaviour {
                             break;
                         case 1:
                             lines.Enqueue(new DialogueLine("It's always rough to lose progress.", 4f));
-                            lines.Enqueue(new DialogueLine("After a fall like that/na lot of people Give Up.", 5f));
+                            lines.Enqueue(new DialogueLine("After a fall like that\na lot of people Give Up.", 5f));
                             lines.Enqueue(new DialogueLine("There's no shame in that.", 3f));
                             break;
                         case 2:

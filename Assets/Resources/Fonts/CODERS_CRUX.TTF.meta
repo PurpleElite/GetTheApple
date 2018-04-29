@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1daee5b9cdeadd64da2499b67e0d656b
+guid: d845690813dc9bb43baceb837c504c72
 timeCreated: 1524013130
 licenseType: Free
 TrueTypeFontImporter:
@@ -13,7 +13,8 @@ TrueTypeFontImporter:
   fontName: Coder's Crux
   fontNames:
   - Coder's Crux
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1daee5b9cdeadd64da2499b67e0d656b, type: 3}
   customCharacters: 
   fontRenderingMode: 2
   ascentCalculationMode: 1

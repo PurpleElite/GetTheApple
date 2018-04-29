@@ -73,8 +73,6 @@ public class SimplePlatformController : MonoBehaviour
             chargeSound.Stop();
             jump = true;
         }
-
-
     }
 
     void FixedUpdate()
@@ -180,6 +178,7 @@ public class SimplePlatformController : MonoBehaviour
             if(colliders == 0)
             {
                 chargeSound.Stop();
+                jumpPower = 100f;
                 grounded = false;
             }
         }

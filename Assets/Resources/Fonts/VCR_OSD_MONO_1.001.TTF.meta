@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8324961e41060284982744fab151785a
-timeCreated: 1524012057
+guid: 58339c184d92cf747b00ac166536b2ed
+timeCreated: 1525034282
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -15,7 +15,7 @@ TrueTypeFontImporter:
   - VCR OSD Mono
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 2
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   userData: 
