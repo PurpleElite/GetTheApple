@@ -6362,11 +6362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnDistance: 1
-  faceplantCount: 0
+  faceplantLineProb: 3
   present: 0
   holes: []
-  caterpillar: {fileID: 0}
-  activeClone: {fileID: 0}
+  talking: 0
 --- !u!4 &1294465994
 Transform:
   m_ObjectHideFlags: 0
@@ -8359,6 +8358,7 @@ MonoBehaviour:
   maxSpeed: 2
   jumpForce: 200
   terminalVelocity: 4.4
+  jumpPower: 100
   grounded: 0
   control: 1
   tumble: 0

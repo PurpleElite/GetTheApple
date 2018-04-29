@@ -19,6 +19,7 @@ public class SimplePlatformController : MonoBehaviour
     private AudioSource chargeSound;
     private float velocity = 0f;
     private BoxCollider2D groundCheck;
+    [SerializeField]
     private float jumpPower = 100f;
     [SerializeField]
     private bool grounded = false;
@@ -151,7 +152,9 @@ public class SimplePlatformController : MonoBehaviour
 
         if (jump)
         {
-           
+            //Inform the caterpillar manager that a jump has occured
+            caterpillar.GetComponent<CaterpillarManager>().Jump(jumpPower);
+
             rb2d.AddForce(new Vector2(0f, jumpPower));
             jumpSound.Play();
             jump = false;
