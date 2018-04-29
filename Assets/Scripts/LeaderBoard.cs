@@ -11,10 +11,14 @@ public class LeaderBoard : MonoBehaviour {
     private void OnGUI() {
 		//GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width), GUILayout.Height(Screen.height));
+        GUIStyle myStyle = new GUIStyle();
+        Font myFont = (Font)Resources.Load("CODERS_CRUX", typeof(Font));
+        myStyle.font = myFont;
+        myStyle.fontSize = 24;
         // Display high scores!
         for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
 			var entry = LeaderBoardScript.GetEntry(i);
-			GUILayout.Label((i + 1) + ". Name: " + entry.name + ", Time: " + entry.score);
+			GUILayout.Label((i + 1) + ". Name: " + entry.name + ", Time: " + entry.score, myStyle);
         }
 
 		// Interface for reporting test scores.
