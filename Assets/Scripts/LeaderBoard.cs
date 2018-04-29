@@ -12,9 +12,9 @@ public class LeaderBoard : MonoBehaviour {
 		//GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width), GUILayout.Height(Screen.height));
         GUIStyle myStyle = new GUIStyle();
-        Font myFont = (Font)Resources.Load("CODERS_CRUX", typeof(Font));
+        Font myFont = (Font)Resources.Load("Fonts/CODERS_CRUX", typeof(Font));
         myStyle.font = myFont;
-        myStyle.fontSize = 24;
+        myStyle.fontSize = 32;
         // Display high scores!
         for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
 			var entry = LeaderBoardScript.GetEntry(i);
