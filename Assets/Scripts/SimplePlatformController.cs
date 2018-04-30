@@ -97,7 +97,7 @@ public class SimplePlatformController : MonoBehaviour
         //Determine if basketman is done getting up after a faceplant
         if (recovering)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).length <= anim.GetCurrentAnimatorStateInfo(0).normalizedTime)
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("BasketIdle") && anim.GetCurrentAnimatorStateInfo(0).length <= anim.GetCurrentAnimatorStateInfo(0).normalizedTime)
             {
                 anim.ResetTrigger("GetUp");
                 recovering = false;
@@ -110,6 +110,7 @@ public class SimplePlatformController : MonoBehaviour
         {
             chargeSound.Stop();
             anim.SetTrigger("Tumble");
+            anim.ResetTrigger("Faceplant");
             anim.ResetTrigger("Jump");
             control = false;
             tumble = true;

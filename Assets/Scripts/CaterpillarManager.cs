@@ -102,11 +102,11 @@ public class CaterpillarManager : MonoBehaviour {
         }
         else if (faceplantCount == 1)
         {
-            lines.Enqueue(new DialogueLine("Hey there basket!\nAre you here to Get The Apple?", 5f));
-            lines.Enqueue(new DialogueLine("Well, don't you worry!\nIt's easy!", 4f));
-            lines.Enqueue(new DialogueLine("All you gotta do\nis climb up this tree!", 4f));
-            lines.Enqueue(new DialogueLine("It'd probably be\neasier if you had arms...", 3f));
-            lines.Enqueue(new DialogueLine("I'm rooting for you though!", 4f));
+            lines.Enqueue(new DialogueLine("Hey there basket!\nAre you here to Get The Apple?", 4f));
+            lines.Enqueue(new DialogueLine("Well, don't you worry!\nIt's easy!", 3f));
+            lines.Enqueue(new DialogueLine("All you gotta do\nis climb up this tree!", 3f));
+            lines.Enqueue(new DialogueLine("It'd probably be\neasier if you had arms...", 2f));
+            lines.Enqueue(new DialogueLine("I'm rooting for you though!", 3f));
             lines.Enqueue(new DialogueLine("Good Luck!", 2f));
         }
         else if (!talking)
@@ -288,19 +288,27 @@ public class CaterpillarManager : MonoBehaviour {
             }
             if (zone == 3)
             {
-                top = true;
                 if (!checkpoint2)
                 {
                     checkpoint2 = true;
-                    lines.Enqueue(new DialogueLine("There's the apple,\nit's so close now!", 3f));
-                    lines.Enqueue(new DialogueLine("I'm proud of you for\nmaking it this far.", 3f));
-                    lines.Enqueue(new DialogueLine("Now Get the Apple!", 2f));
+                    if (Time.time - StartGame.startTime < 90)
+                    {
+                        lines.Enqueue(new DialogueLine("Wow! That was fast!", 3f));
+                        lines.Enqueue(new DialogueLine("You've done this before\nhaven't you?", 3f));
+                    }
+                    else
+                    {
+                        lines.Enqueue(new DialogueLine("There's the apple,\nit's so close now!", 3f));
+                        lines.Enqueue(new DialogueLine("I'm proud of you for\nmaking it this far.", 3f));
+                        lines.Enqueue(new DialogueLine("Now Get the Apple!", 2f));
+                    }
                 }
                 else if (!top)
                 {
                     lines.Enqueue(new DialogueLine("And now you're back up here again.", 3f));
                     lines.Enqueue(new DialogueLine("Maybe you'll get it this time?", 3f));
                 }
+                top = true;
             }
         }
     }
