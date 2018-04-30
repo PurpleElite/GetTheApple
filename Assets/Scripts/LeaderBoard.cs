@@ -11,7 +11,7 @@ public class LeaderBoard : MonoBehaviour {
     public Vector2 scrollPosition;
     private void OnGUI() {
         caterpillar = GameObject.FindGameObjectWithTag("CaterpillarManager");
-        //PlayerPrefs.DeleteAll();
+       // PlayerPrefs.DeleteAll();
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width), GUILayout.Height(Screen.height));
         GUIStyle myStyle = new GUIStyle();
         GUIStyle titleStyle = new GUIStyle();
@@ -19,17 +19,16 @@ public class LeaderBoard : MonoBehaviour {
         myStyle.font = myFont;
         myStyle.fontSize = 32;
         myStyle.normal.textColor = Color.white;
-        myStyle.alignment = TextAnchor.MiddleCenter;
         titleStyle.font = myFont;
         titleStyle.fontSize = 48;
         titleStyle.normal.textColor = Color.white;
-        titleStyle.alignment = TextAnchor.MiddleCenter;
-        GUILayout.Label("Results", titleStyle);
+        GUILayout.Space(20);
+        GUILayout.Label("                    Results", titleStyle);
         GUILayout.Space(25);
         // Display high scores!
         for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
 			var entry = LeaderBoardScript.GetEntry(i);
-			GUILayout.Label((i + 1) + ". Name: " + entry.name + ", Time: " + entry.score, myStyle);
+			GUILayout.Label("                    " + (i + 1) + ". Name: " + entry.name + ", Time: " + entry.score, myStyle);
         }
 
         // Interface for reporting test scores.
