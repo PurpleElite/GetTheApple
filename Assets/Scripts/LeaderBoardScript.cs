@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class LeaderBoardScript {
-	public static int EntryCount = 1;
+	public static int EntryCount = 0;
 
 	public struct ScoreEntry {
 		public string name;
