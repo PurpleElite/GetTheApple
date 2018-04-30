@@ -63,4 +63,14 @@ public static class LeaderBoardScript {
 		SaveScores();
 
 	}
+
+    public static float GetTotalScore()
+    {
+        float total = 0;
+        for (int i = 0; i < EntryCount; ++i)
+        {
+            total += PlayerPrefs.GetFloat(PlayerPrefsBaseKey + "[" + i + "].score", 0);
+        }
+        return total;
+    }
 }

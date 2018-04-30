@@ -7,9 +7,11 @@ public class LeaderBoard : MonoBehaviour {
 	private static string _nameInput = "";
 	private static string _scoreInput = "0";
     private int rec = 0;
+    private GameObject caterpillar;
     public Vector2 scrollPosition;
     private void OnGUI() {
-		//GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
+        caterpillar = GameObject.FindGameObjectWithTag("CaterpillarManager");
+        //GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
         scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(Screen.width), GUILayout.Height(Screen.height));
         GUIStyle myStyle = new GUIStyle();
         GUIStyle titleStyle = new GUIStyle();
@@ -20,7 +22,7 @@ public class LeaderBoard : MonoBehaviour {
         titleStyle.font = myFont;
         titleStyle.fontSize = 48;
         titleStyle.normal.textColor = Color.white;
-        GUILayout.Label("Leaderboard", titleStyle);
+        GUILayout.Label("Results", titleStyle);
         GUILayout.Space(25);
         // Display high scores!
         for (int i = 0; i < LeaderBoardScript.EntryCount; ++i) {
@@ -28,16 +30,17 @@ public class LeaderBoard : MonoBehaviour {
 			GUILayout.Label((i + 1) + ". Name: " + entry.name + ", Time: " + entry.score, myStyle);
         }
 
-		// Interface for reporting test scores.
-		//GUILayout.Space(Screen.height - 300);
+        // Interface for reporting test scores.
+        //GUILayout.Space(Screen.height - 300);
 
-		//_nameInput = GUILayout.TextField(_nameInput);
-		//_scoreInput = GUILayout.TextField(_scoreInput);
+        //_nameInput = GUILayout.TextField(_nameInput);
+        //_scoreInput = GUILayout.TextField(_scoreInput);
 
-	    int score;
+        int score;
 		int.TryParse(_scoreInput, out score);
         if (rec < 1)
         {
+            caterpillar.GetComponent<CaterpillarLeaderboard>().Talk(Time.time - StartGame.startTime, LeaderBoardScript.EntryCount, LeaderBoardScript.GetTotalScore());
             LeaderBoardScript.Record(_nameInput, score);
             // Reset for next input.
             _nameInput = "";
@@ -45,9 +48,9 @@ public class LeaderBoard : MonoBehaviour {
             rec = 1;
             //StartCoroutine(Wait(5.0f));
         }
-            
-        //Wait 10 seconds to go back to name screen.
-        Invoke("DelayedFunction", 10.0f);
+
+        //Wait 25 seconds to go back to name screen.
+        Invoke("DelayedFunction", 25.0f);
         GUILayout.EndArea();
 	}
     private void DelayedFunction()
