@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SwitchToLead : MonoBehaviour {
 
-	private void OnGUI() {
+	/*private void OnGUI() {
 		GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
 
 		GUILayout.Space(Screen.height - 30);
@@ -14,5 +14,10 @@ public class SwitchToLead : MonoBehaviour {
 		}
 
 		GUILayout.EndArea();
-	}
+	}*/
+
+    public void GiveUp()
+    {
+        SceneManager.LoadScene("LeaderBoard");
+    }
 }
