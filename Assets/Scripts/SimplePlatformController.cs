@@ -43,10 +43,9 @@ public class SimplePlatformController : MonoBehaviour
     {
         AudioSource[] audio = GetComponents<AudioSource>();
         jumpSound = audio[0];
-        landSound = audio[1];
-        tumbleSound = audio[2];
-        faceSound = audio[3];
-        chargeSound = audio[4];
+        tumbleSound = audio[1];
+        faceSound = audio[2];
+        chargeSound = audio[3];
         currentJump = 0;
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
