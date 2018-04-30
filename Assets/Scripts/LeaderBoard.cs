@@ -41,8 +41,10 @@ public class LeaderBoard : MonoBehaviour {
 		int.TryParse(_scoreInput, out score);
         if (rec < 1)
         {
-            caterpillar.GetComponent<CaterpillarLeaderboard>().Talk(Time.time - StartGame.startTime, LeaderBoardScript.EntryCount, LeaderBoardScript.GetTotalScore());
             LeaderBoardScript.Record(_nameInput, score);
+            caterpillar.GetComponent<CaterpillarLeaderboard>().Talk(Time.time - StartGame.startTime,
+                LeaderBoardScript.EntryCount,
+                LeaderBoardScript.GetTotalScore());
             // Reset for next input.
             _nameInput = "";
             _scoreInput = "0";

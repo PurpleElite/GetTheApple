@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CaterpillarLeaderboard : MonoBehaviour {
 
-    public Transform spawnLocation;
+    public RectTransform spawnLocation;
     private GameObject caterpillar;
     private Queue<DialogueLine> lines;
     private System.Random randomizer;

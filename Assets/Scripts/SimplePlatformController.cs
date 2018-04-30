@@ -37,6 +37,8 @@ public class SimplePlatformController : MonoBehaviour
     //Keep track of number of objects the groundcheck has entered
     private int colliders = 0;
 
+    private bool jankyFukinVariable = true;
+
 
     // Use this for initialization
     void Awake()
@@ -55,12 +57,16 @@ public class SimplePlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetButton("Jump") && grounded && !recovering && !tumble && control)
 
         {
-            jumpPower = jumpPower + 3f;
-            if(!chargeSound.isPlaying)
+            if (jankyFukinVariable)
+            {
+                StartCoroutine(JankyFukinSolution());
+                jankyFukinVariable = false;
+            }
+            //jumpPower = jumpPower + 3f;
+            if (!chargeSound.isPlaying)
                 chargeSound.Play();
             if (jumpPower >= 400f)
             {
@@ -73,6 +79,13 @@ public class SimplePlatformController : MonoBehaviour
             chargeSound.Stop();
             jump = true;
         }
+    }
+
+    private IEnumerator JankyFukinSolution()
+    {
+        yield return new WaitForSeconds(0.05f);
+        jumpPower = jumpPower + 10f;
+        jankyFukinVariable = true;
     }
 
     void FixedUpdate()
