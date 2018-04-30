@@ -55,6 +55,7 @@ public class SimplePlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetButton("Jump") && grounded && !recovering && !tumble && control)
 
         {
@@ -76,6 +77,7 @@ public class SimplePlatformController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         float h = Input.GetAxis("Horizontal");
         if (h * rb2d.velocity.x < maxSpeed && control)
         {
@@ -129,6 +131,10 @@ public class SimplePlatformController : MonoBehaviour
 
             //Inform the caterpillar manager that a faceplant has occured
             caterpillar.GetComponent<CaterpillarManager>().FacePlant();
+        }
+        else if (recovering && gameObject.transform.position.y < 1)
+        {
+            recovering = false;
         }
         else if (control == false && (Input.GetButton("Jump") || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01))
         {
